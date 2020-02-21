@@ -2,6 +2,8 @@
 
 Widget Draughts is a computer draughts game for Linux written using C++ and wxWidgets.
 
+![](widget-draughts.png)
+
 ## Getting Started
 
 Draughts (also known as checkers) is a  strategy board games for two players which involve diagonal moves played on an 8×8 (64 cell) checkerboard. Each player has their own colour and begins the game with 12 pieces. If an opponents piece is in the next square, the player can jump over it and capture it, removing the piece from the board. To win the game you must stop the opponent (computer) from moving when it comes to their turn which can be done by taking all of their pieces or by blocking their pieces so that there is nowhere to move. For more information follow this [link](https://en.wikipedia.org/wiki/Draughts).
