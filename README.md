@@ -26,13 +26,15 @@ sudo apt install git
 To build Widget Draughts from source 
 
 ```
-cd src
+
 mkdir build  
 cd build  
 cmake ..
 make
-su (or sudo)
+su (Debian)
 make install
+or
+sudo make install (Ubuntu)
 ```
 Widget Draughts is installed to /usr/local/wxdraughts
 
