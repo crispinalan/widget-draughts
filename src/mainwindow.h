@@ -20,7 +20,7 @@ const int BLACK=3;
 const int WKING =4;
 const int BKING=5;
 
-const int MAX_DEPTH=24;
+const int MAX_DEPTH=8;
 
 const int CHECKER  =	100; // a checkers' worth
 const int KING     =	130; // a kings' worth

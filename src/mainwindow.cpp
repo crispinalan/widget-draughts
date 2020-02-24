@@ -539,33 +539,44 @@ vector<MovePiece> MainWindow::computerCheck(int grid[ROWS][COLS], int player)
 
 MovePiece* MainWindow::minimax(int grid[ROWS][COLS], int player)
 {
+	wxString msg;
 	MovePiece *bestMove = new MovePiece(0,0,0,0);
 	vector<MovePiece> moves = computerCheck(grid, player);	
 	if(moves.size()==1){ //only one move
 		searchDepth = 1;
-		//cout<<"Single move: Search Depth = "<<searchDepth<<endl;		
+		//cout<<"Single move: Search Depth = "<<searchDepth<<endl;
+		msg.clear();
+		msg<<"Only one move possible";
+		SetStatusText(msg, 1);	
 		bestMove->Change(moves[0].r1, moves[0].c1, moves[0].r2, moves[0].c2);
 		return bestMove;
 	}	
 	
 	int bottom=0;	
-	int depth = 0;
+	
 	//int res =0;
 	for(;;){
 		 
 		if(bottom >= MAX_DEPTH){
 			break;
 		}
-		
+		int depth = 0;
 		bottom++;					
 		maxMove(grid, bestMove, player, 
 		numeric_limits<int>::min(), numeric_limits<int>::max(), bottom, depth);
+		
+		msg.clear();
+		msg<<"Search depth "<<bottom;
+		SetStatusText(msg, 1);		
+
+		
+		
 		//cout <<"maxMove result = "<<res<<endl;
 		//cout <<"bottom = "<<bottom<<endl;
 		//cout <<"depth = "<<depth<<endl;
 	
 	}	
-	searchDepth = bottom;	
+	//searchDepth = bottom;	
 	//cout<<"Search Depth = "<<searchDepth<<endl;
 	return bestMove;
 }
@@ -794,7 +805,7 @@ int MainWindow::evaluation1(int grid[ROWS][COLS], int player)
 			
 	score+=materialBlack-materialWhite;		
 	
-	if (player==WHITE)
+	if (player==BLACK)
 		return score;
 	else
 		return -score;
