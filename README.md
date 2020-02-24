@@ -65,7 +65,6 @@ check for blocking wins
 strengthen draughts-play engine
 provide option to set level of playing strength 
 provide more user features
-tournament style clock display
 ``` 
 
 ## History

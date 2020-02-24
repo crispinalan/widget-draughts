@@ -550,16 +550,20 @@ MovePiece* MainWindow::minimax(int grid[ROWS][COLS], int player)
 	
 	int bottom=0;	
 	int depth = 0;
-	int res =0;
+	//int res =0;
 	for(;;){
 		 
-		if(res >= MAX_DEPTH){
+		if(bottom >= MAX_DEPTH){
 			break;
 		}
 		
 		bottom++;					
-		res = maxMove(grid, bestMove, player, 
-		numeric_limits<int>::min(), numeric_limits<int>::max(), bottom, depth);	
+		maxMove(grid, bestMove, player, 
+		numeric_limits<int>::min(), numeric_limits<int>::max(), bottom, depth);
+		//cout <<"maxMove result = "<<res<<endl;
+		//cout <<"bottom = "<<bottom<<endl;
+		//cout <<"depth = "<<depth<<endl;
+	
 	}	
 	searchDepth = bottom;	
 	//cout<<"Search Depth = "<<searchDepth<<endl;
@@ -579,7 +583,7 @@ int MainWindow::maxMove(int grid[ROWS][COLS],
 	vector<MovePiece> moves = computerCheck(b, player);	
 		
 	if(moves.size()==0 || depth >= bottom){		
-		return evaluation1(b,player);
+		return evaluation2(b,player);
 	}	
 	for(unsigned int i=0; i<moves.size(); i++){
 		moves = computerCheck(b, player);
@@ -616,7 +620,7 @@ int MainWindow::maxMove(int grid[ROWS][COLS],
 			return res;
 		}
 		
-		alpha = max(alpha, res);		
+		alpha = std::max(alpha, res);		
 		std::copy(&grid[0][0], &grid[0][0]+ROWS*COLS,&b[0][0]);
 	}
 	return res;
@@ -635,7 +639,7 @@ int MainWindow::minMove(int grid[ROWS][COLS],
 	vector<MovePiece> moves = computerCheck(b, player);	
 		
 	if(moves.size()==0 || depth >= bottom){
-		return evaluation1(b,player);
+		return evaluation2(b,player);
 	}	
 	depth++;	
 	for(unsigned int i=0; i<moves.size(); i++){
@@ -652,7 +656,7 @@ int MainWindow::minMove(int grid[ROWS][COLS],
 		if(res < alpha){
 			return res;
 		}		
-		beta = min(beta, res);		
+		beta = std::min(beta, res);		
 	}	
 	return res;
 }
