@@ -26,7 +26,6 @@ sudo apt install git
 To build Widget Draughts from source 
 
 ```
-
 mkdir build  
 cd build  
 cmake ..
@@ -42,8 +41,20 @@ Use a menu editor such as [Alacarte](https://en.wikipedia.org/wiki/Alacarte) on 
 
 ### Binaries
 
+![](snapstore.png)
 
+The Widget Draughts snap package is available at 
 
+[Widget Draughts Package](https://snapcraft.io/widget-draughts)
+
+To install use ..
+```
+sudo snap install --edge widget-draughts
+```
+To remove use ..
+```
+sudo snap remove widget-draughts
+```
 ## Versioning
 
 [SemVer](http://semver.org/) is used for versioning. 
