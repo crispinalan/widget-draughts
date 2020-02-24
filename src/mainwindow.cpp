@@ -42,9 +42,7 @@ MainWindow::MainWindow()
 	
 	//this->Refresh();	
 	Bind(wxEVT_SIZE, &MainWindow::OnReSize, this ); //crude resizing
-	
-	timeLimit=5;
-	
+		
 	white =1; //1=computer 0 = human (main scope)
 	black=0;  //1=computer 0=human
 	
@@ -64,7 +62,7 @@ void MainWindow::ResetBoard()
 void MainWindow::OnMenuAbout(wxCommandEvent& evt)
 {
 	wxMessageBox(wxString("Widget Draughts 2020\nAuthor Alan Crispin\ngithub.com/crispinalan"),
-                wxString("About Widget Draughts v1.0"),
+                wxString("About Widget Draughts 1.0.1"),
                 wxOK|wxICON_INFORMATION, this );
 }
 void MainWindow::OnMenuResetBoard(wxCommandEvent& evt)
@@ -236,7 +234,8 @@ void MainWindow::swap(int grid[ROWS][COLS], int row1, int col1, int row2, int co
 	}	
 }
 
-int MainWindow::makeComputerMove(int grid[ROWS][COLS], int player, int row1, int col1, int row2, int col2)
+int MainWindow::makeComputerMove(int grid[ROWS][COLS], int player, int row1, int col1, 
+																int row2, int col2)
 {
     int jmp_r = 0;
     int jmp_c = 0;
@@ -375,7 +374,7 @@ int MainWindow::checkMove(int grid[ROWS][COLS], int player, int row1, int col1, 
   
     return -1; 
 }
-int MainWindow::testMove(int grid[ROWS][COLS], int player, int row1, int col1, int row2, int col2, clock_t start, double limit)
+int MainWindow::testMove(int grid[ROWS][COLS], int player, int row1, int col1, int row2, int col2)
 {
 	int jmp_r;
     int jmp_c;
@@ -407,11 +406,10 @@ int MainWindow::testMove(int grid[ROWS][COLS], int player, int row1, int col1, i
 	        // move is valid:
 	        grid[jmp_r][jmp_c] = 1;
 	        swap(grid,row1,col1,row2,col2); //make the move by swapping 
-	        
-	        double end= (clock() - start) / CLOCKS_PER_SEC;
+	               
 
-	        while(checkJump(grid, player, row2, col2)==0 && end<limit){ 	        	
-			    testComputer(grid, player, start, limit); 
+	        while(checkJump(grid, player, row2, col2)==0){ 	        	
+			    testComputer(grid, player); 
 	        }	        	
 	        return 0;       
 	    }
@@ -453,9 +451,8 @@ void MainWindow::computerMove(int grid[ROWS][COLS], int player)
 	//cout<< "Computer is searching for move now...\n";
 	
 	vector<MovePiece> moves = computerCheck(grid, player);
-
-	clock_t start = clock(); //Start timer
-	MovePiece *best = minimax(grid, player, start);
+	
+	MovePiece *best = minimax(grid, player);
 
 	//cout<< "Computer finished searching at depth "<<dep<<" in "<<tim<<" seconds"<<endl;
 
@@ -467,18 +464,18 @@ void MainWindow::computerMove(int grid[ROWS][COLS], int player)
 	delete best; //to prevent sementation fault	
 	makeComputerMove(grid, player, row1-1,col1,row2-1,col2);
 }
-int MainWindow::testComputer(int grid[ROWS][COLS], int player, clock_t start, double limit)
+int MainWindow::testComputer(int grid[ROWS][COLS], int player)
 {
 	int row1, col1, row2, col2 =0;		
 	vector<MovePiece> moves = computerCheck(grid, player);
-	MovePiece *best = minimax(grid, player, start);
+	MovePiece *best = minimax(grid, player);
 	row1 = best->r1;
 	col1 = best->c1;
 	row2 = best->r2;
 	col2 = best->c2;	
 	canJump=0;	
 	delete best;  //nto prevent seg fault		
-	testMove(grid, player, row1-1,col1,row2-1,col2, start, limit);
+	testMove(grid, player, row1-1,col1,row2-1,col2);
 	return 0;
 }
 vector<MovePiece> MainWindow::computerCheck(int grid[ROWS][COLS], int player)
@@ -540,40 +537,37 @@ vector<MovePiece> MainWindow::computerCheck(int grid[ROWS][COLS], int player)
 	return moveList;	
 }
 
-MovePiece* MainWindow::minimax(int grid[ROWS][COLS], int player, clock_t start)
+MovePiece* MainWindow::minimax(int grid[ROWS][COLS], int player)
 {
 	MovePiece *bestMove = new MovePiece(0,0,0,0);
 	vector<MovePiece> moves = computerCheck(grid, player);	
-	if(moves.size()==1){
-		dep = 1;
-		tim = (clock() - start) / CLOCKS_PER_SEC;
+	if(moves.size()==1){ //only one move
+		searchDepth = 1;
+		//cout<<"Single move: Search Depth = "<<searchDepth<<endl;		
 		bestMove->Change(moves[0].r1, moves[0].c1, moves[0].r2, moves[0].c2);
 		return bestMove;
 	}	
 	
-	double limit = 0.5*timeLimit;
 	int bottom=0;	
-	double end;
+	int depth = 0;
+	int res =0;
 	for(;;){
-		end= (clock() - start) / CLOCKS_PER_SEC;
-		if(end >= limit){
+		 
+		if(res >= MAX_DEPTH){
 			break;
 		}
-		int depth = 0;
-		bottom++;		
-		//int re = maxMove(grid, bestMove, player, limit, start, numeric_limits<int>::min(), numeric_limits<int>::max(), bottom, depth);		
-		maxMove(grid, bestMove, player, limit, start, 
+		
+		bottom++;					
+		res = maxMove(grid, bestMove, player, 
 		numeric_limits<int>::min(), numeric_limits<int>::max(), bottom, depth);	
 	}	
-	dep = bottom;
-	tim = (clock() - start) / CLOCKS_PER_SEC;
+	searchDepth = bottom;	
+	//cout<<"Search Depth = "<<searchDepth<<endl;
 	return bestMove;
 }
 int MainWindow::maxMove(int grid[ROWS][COLS],
     MovePiece* bestMove,
-    int player,
-    double limit,
-    clock_t start,
+    int player,    
     int alpha,
     int beta,
     int bottom,
@@ -583,13 +577,13 @@ int MainWindow::maxMove(int grid[ROWS][COLS],
 	int b[ROWS][COLS];
 	std::copy(&grid[0][0], &grid[0][0]+ROWS*COLS,&b[0][0]);	
 	vector<MovePiece> moves = computerCheck(b, player);	
-	double end= (clock() - start) / CLOCKS_PER_SEC;		
-	if(moves.size()==0 || end >= limit || depth >= bottom){		
-		return evaluation2(b,player);
+		
+	if(moves.size()==0 || depth >= bottom){		
+		return evaluation1(b,player);
 	}	
 	for(unsigned int i=0; i<moves.size(); i++){
 		moves = computerCheck(b, player);
-		testMove(b, player, moves[i].r1-1, moves[i].c1, moves[i].r2-1, moves[i].c2, start, limit);
+		testMove(b, player, moves[i].r1-1, moves[i].c1, moves[i].r2-1, moves[i].c2);
 		MovePiece *opp = new MovePiece(0,0,0,0);		
 		int temp;
 		depth++;		
@@ -600,7 +594,7 @@ int MainWindow::maxMove(int grid[ROWS][COLS],
 			else{
 				white = 1;
 			}
-			temp = minMove(b, opp, switchPlayer(player), limit, start, alpha, beta, bottom, depth);
+			temp = minMove(b, opp, switchPlayer(player), alpha, beta, bottom, depth);
 			if(player==WHITE){
 				black = 0;
 			}
@@ -609,7 +603,7 @@ int MainWindow::maxMove(int grid[ROWS][COLS],
 			}
 		}
 		else{
-			temp = minMove(b, opp, switchPlayer(player), limit, start, alpha, beta, bottom, depth);
+			temp = minMove(b, opp, switchPlayer(player), alpha, beta, bottom, depth);
 		}		
 		delete opp;  //delete to avoid segmentation fault?	
 		//cout<<"temp: "<<temp<<endl;
@@ -629,9 +623,7 @@ int MainWindow::maxMove(int grid[ROWS][COLS],
 }
 int MainWindow::minMove(int grid[ROWS][COLS],
     MovePiece* bestMove,
-    int player,
-    double limit,
-    clock_t start,
+    int player,    
     int alpha,
     int beta,
     int bottom,
@@ -641,16 +633,16 @@ int MainWindow::minMove(int grid[ROWS][COLS],
 	int b[ROWS][COLS];
 	std::copy(&grid[0][0], &grid[0][0]+ROWS*COLS,&b[0][0]); //copy grid into b
 	vector<MovePiece> moves = computerCheck(b, player);	
-	double end= (clock() - start) / CLOCKS_PER_SEC;		
-	if(moves.size()==0 || end >= limit || depth >= bottom){
-		return evaluation2(b,player);
+		
+	if(moves.size()==0 || depth >= bottom){
+		return evaluation1(b,player);
 	}	
 	depth++;	
 	for(unsigned int i=0; i<moves.size(); i++){
 		moves = computerCheck(b, player);
-		testMove(b, player, moves[i].r1-1, moves[i].c1, moves[i].r2-1, moves[i].c1, start, limit);		
+		testMove(b, player, moves[i].r1-1, moves[i].c1, moves[i].r2-1, moves[i].c1);		
 		MovePiece *opp = new MovePiece(0,0,0,0);		
-		int temp = maxMove(b, opp, switchPlayer(player), limit, start, alpha, beta, bottom, depth);
+		int temp = maxMove(b, opp, switchPlayer(player),alpha, beta, bottom, depth);
 		delete opp; //to prevent segmentation fault
 		if(temp < res){
 			res = temp;

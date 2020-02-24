@@ -5,8 +5,7 @@
 #include <vector>
 #include "movepiece.h"
 
-#include <limits>
-#include <time.h>
+
 
 
 
@@ -21,7 +20,7 @@ const int BLACK=3;
 const int WKING =4;
 const int BKING=5;
 
-
+const int MAX_DEPTH=24;
 
 const int CHECKER  =	100; // a checkers' worth
 const int KING     =	130; // a kings' worth
@@ -69,10 +68,9 @@ public:
 
         int white;
         int black;
-        int canJump = 0;
-        int timeLimit = 5;
-        int dep = 0;
-        double tim = 0;
+        int canJump = 0;      
+		int searchDepth=0;
+      
         bool playerFinished = false;
         wxString statusText = "";		
 
@@ -84,27 +82,25 @@ public:
        
         int makeComputerMove(int grid[ROWS][COLS], int player, int row1, int col1, int row2, int col2);
         int checkMove(int grid[ROWS][COLS], int player, int row1, int col1, int row2, int col2);
-        int testMove(int grid[ROWS][COLS], int player, int row1, int col1, int row2, int col2, clock_t start, double limit);
+        int testMove(int grid[ROWS][COLS], int player, int row1, int col1, int row2, int col2);
 
         int legalMoves(int player, int grid[ROWS][COLS]);
         int checkJump(int grid[ROWS][COLS], int player, int rr, int cc);
 
         void computerMove(int grid[ROWS][COLS], int player);
 
-        int testComputer(int grid[ROWS][COLS], int player, clock_t start, double limit);
+        int testComputer(int grid[ROWS][COLS], int player);
 
         vector<MovePiece> computerCheck(int grid[ROWS][COLS], int player);
 
         int evaluation1(int grid[ROWS][COLS], int player);
 		int evaluation2(int grid[ROWS][COLS], int player);
 		int evaluation3(int grid[ROWS][COLS], int player);
-        MovePiece* minimax(int grid[8][8], int player, clock_t start);
+        MovePiece* minimax(int grid[8][8], int player);
 
         int maxMove(int grid[8][8],
             MovePiece* bestMove,
-            int player,
-            double limit,
-            clock_t start,
+            int player,           
             int alpha,
             int beta,
             int bottom,
@@ -112,9 +108,7 @@ public:
 
         int minMove(int grid[8][8],
             MovePiece* bestMove,
-            int player,
-            double limit,
-            clock_t start,
+            int player,            
             int alpha,
             int beta,
             int bottom,
