@@ -43,7 +43,7 @@ Use a menu editor such as [Alacarte](https://en.wikipedia.org/wiki/Alacarte) on 
 
 ![](snapstore.png)
 
-The Widget Draughts snap package is available at 
+A Widget Draughts snap package is available at 
 
 [Widget Draughts Package](https://snapcraft.io/widget-draughts)
 
@@ -55,6 +55,9 @@ To remove use ..
 ```
 sudo snap remove widget-draughts
 ```
+
+The snap package has been developed to learn about snapcraft packaging but it is recommended to install "Widget Draughts" from source to get the latest version. With a snap package the application is distributed (sandboxed) inside a minimal virtual machine. 
+
 ## Versioning
 
 [SemVer](http://semver.org/) is used for versioning. 
@@ -73,9 +76,12 @@ This project is licensed under the GPL License.
 Future updates:
 ```
 check for blocking wins
-strengthen draughts-play engine
-provide option to set level of playing strength 
-provide more user features
+strengthen draughts-play minimax engine
+check pieces threatened with capture 
+check pieces endangered when making a move
+introduce triple kings 
+provide an option to set skill level
+improve end game 
 ``` 
 
 ## History
