@@ -8,11 +8,11 @@ Widget Draughts is a computer draughts game for Linux written using C++ and wxWi
 
 Draughts (also known as checkers) is a  strategy board game for two players which involves moving pieces diagonally on an 8×8 (64 cell) checkerboard. Each player has their own colour and begins the game with 12 pieces which can only move and capture in a diagonally forwards direction. If an opponents piece is in the next square, the player can jump over it and capture it, removing the piece from the board. If a player can jump, it must and if after making a jump another jump is possible it must jump again. To win the game you must stop the opponent (computer) from moving when it comes to their turn which can be done by taking all of their pieces or by blocking their pieces so that there is nowhere to move. A piece which reaches the other end of the board is "crowned" a king. Kings are allowed to move and capture diagonally forwards and backwards and so are more powerful and valuable than ordinary pieces. For more information follow this [link](https://en.wikipedia.org/wiki/Draughts).
 
-With Widget Draughts you play against the computer. The human player is black and the computer is white.
+With Widget Draughts you play against the computer. The human player is white and the computer is black.
 
 ### Prerequisites
 
-To build and install Widget Draughts on Ubuntu and derivatives you need to install the following packages (if not already installed) 
+To build and install Widget Draughts on Debian, Ubuntu and Ubuntu derivatives you need to install the following packages (if not already installed) 
 
 ```
 sudo apt install build-essential
@@ -41,11 +41,9 @@ Use a menu editor such as [Alacarte](https://en.wikipedia.org/wiki/Alacarte) on 
 
 ### Binaries
 
-![](snapstore.png)
+![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/widget-draughts)
 
-A Widget Draughts snap package is available at 
 
-[Widget Draughts Package](https://snapcraft.io/widget-draughts)
 
 To install use ..
 ```
@@ -56,7 +54,7 @@ To remove use ..
 sudo snap remove widget-draughts
 ```
 
-The snap package has been developed to learn about snapcraft packaging but it is recommended to install "Widget Draughts" from source to get the latest version. With a snap package the application is distributed (sandboxed) inside a minimal virtual machine. 
+The snap package has been developed to learn about snapcraft packaging. With a snap package the application is distributed (sandboxed) inside a minimal virtual machine. However, with this small application building from source is straightforward and provides the latest source.
 
 ## Versioning
 

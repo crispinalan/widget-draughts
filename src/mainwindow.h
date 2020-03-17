@@ -1,33 +1,122 @@
+/***************************************************************************
+ *   Author Alan Crispin aka. crispina                                     *
+ *   crispinalan@gmail.com                                                 *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
+ ***************************************************************************/
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include <wx/wx.h>
-#include <iostream>
 #include <vector>
-#include "movepiece.h"
+
+#include <iostream>
+#include <list>
+#include <vector>
+#include <wx/wx.h>
+#include <string>
+
+using namespace std;
+
+const int BOARDSIZE=8;
+
+const int WHITE=1; //Declare game consts
+const int BLACK=2;
+const int WKING=3;
+const int BKING=4;
+const int EMPTY=0;
 
 
 
+struct Point {
+public:
+    int row;
+    int col;
+    //Point(int _row, int _col) : row(_row), col(_col) {}
+};
 
+struct Move {
+public:
+    Point start;
+    Point finish;
+	//Move() : start(0, 0), finish(0, 0) {}
+	
+};
 
-using namespace std; 
+class Board
+{
+private:
+    int** board;
+   
+public:
+    
+	Board();
+    Board(int** b);
+	
+	int squareSize=80;
+    
+	bool movesEqual(Move one, Move two);    
+    Board* clone();
+    int getPiece(int i, int j);
+    int getPiece(Point p);
+    Point getMidSquare(Move move);
+       
+    void getAllMovesWhite(vector<Move>& moves);
+	void getAllMovesBlack(vector<Move>& moves);
+	
+    void getLegalJumpMovesWhite(int r, int c,vector<Move>& moves);
+	void getLegalJumpMovesBlack(int r, int c, vector<Move>& moves);
+    void getLegalMovesWhite(int r, int c, vector<Move>& moves);
+	void getLegalMovesBlack(int r, int c, vector<Move>& moves);
+    
+	void setUpBoard();	
+	bool possibleSquare(const int& i,const int& j);
+	void resetBoard();
+		
+	bool makeWhiteMove(int r1,int c1, int r2, int c2);
+	
+	void makeComputerMovement();
+	bool isAIMoveAJump(Move move);
+	bool isBlackMoveAJump(int r1, int c1, int r2, int c2);
+    bool isWhiteMoveAJump(int r1, int c1, int r2, int c2);
+    void render(wxDC& dc);
+	void showWhiteJumpMoves();
+	bool canJumpAgainBlack(int row, int col);
+	bool canJumpAgainWhite(int row, int col);	
+	bool isBlack(int player);
+	bool isWhite(int player);
+	
+	int numberWhitePiecesOnBoard();
+	int numberWhiteKingsOnBoard();
+	int numberBlackPiecesOnBoard();
+	int numberBlackKingsOnBoard();
+	
+	bool checkForBlackJump();
+	
+	bool isWhiteMoveAJump(int row, int col);
+	bool isBlackMoveAJump(int row, int col);
+		
+		
+	Move bestBlackMove;
+	int blackScore(Board board);
+	int whiteScore(Board board);
+	bool blackMove(int level=6);
+	bool whiteMove(int level=6);
+		
 
-const int ROWS =8;
-const int COLS=8;
+};
 
-const int EMPTY=1;
-const int WHITE=2;
-const int BLACK=3;
-const int WKING =4;
-const int BKING=5;
-
-const int MAX_DEPTH=8;
-
-const int CHECKER  =	100; // a checkers' worth
-const int KING     =	130; // a kings' worth
-const int BACKRANK1 =	30; //back rank positions
-const int BACKRANK2 =	20; //back rank
-const int BACKRANK3 =	10; //back rank
-const int CENTRALRANKS= 5;
 
 
 class MainWindow : public wxFrame
@@ -35,108 +124,49 @@ class MainWindow : public wxFrame
 public:
 	MainWindow();
 	~MainWindow();
-
-    int squareSize=80;
-
-	void PaintEvent(wxPaintEvent & evt);
-    void PaintNow();    
+	
+	
+	int squareSize=80;
+	void paintEvent(wxPaintEvent & evt);
+    void paintNow();    
     void render(wxDC& dc);		
-	void OnMouseLeftDown(wxMouseEvent& event);
-    void OnMouseLeftUp(wxMouseEvent& event);
-	void OnReSize(wxSizeEvent& event);
+	void onMouseLeftDown(wxMouseEvent& event);
+    void onMouseLeftUp(wxMouseEvent& event);
+	void onReSize(wxSizeEvent& event);	
+	void resetBoard();	
 	
-	void ResetBoard();			
-	
-	int board [8][8]; //xy position matrix
-	int c[8][8]={
-			{0,2,0,2,0,2,0,2},  //WHITE (moves down)
-			{2,0,2,0,2,0,2,0}, 
-			{0,2,0,2,0,2,0,2}, 
-			{1,0,1,0,1,0,1,0}, 
-			{0,1,0,1,0,1,0,1}, 
-			{3,0,3,0,3,0,3,0},
-			{0,3,0,3,0,3,0,3}, //BLACK (moves up)
-			{3,0,3,0,3,0,3,0}};
+	bool convertMousePosToXY(const wxPoint& pos, int& x, int& y) const;
+	bool ConvertMousePosToRowAndColumn(const wxPoint& pos, int& row, int& col) const;
+    
+	int m_rowLeftMDown;
+	int m_colLeftMDown;        
+	int m_rowLeftMUp;
+	int m_colLeftMUp;
 	
 	
-     bool ConvertMousePosToRowAndColumn(const wxPoint& pos, int& row, int& col) const;
-        
-        int m_rowLeftMDown;
-        int m_colLeftMDown;        
-        int m_rowLeftMUp;
-        int m_colLeftMUp;
+	bool playerFinished = false;
+			
+	Board board;
+	
+    wxString statusText = "";	
+	wxStatusBar* statusbar=nullptr;
 
-        int white;
-        int black;
-        int canJump = 0;      
-		int searchDepth=0;
-      
-        bool playerFinished = false;
-        wxString statusText = "";		
-
-        bool isWhite(int player);
-        bool isBlack(int player);
-        bool isComputer(int player);
-        int switchPlayer(int player);
-        void swap(int grid[ROWS][COLS], int row1, int col1, int row2, int col2);
-       
-        int makeComputerMove(int grid[ROWS][COLS], int player, int row1, int col1, int row2, int col2);
-        int checkMove(int grid[ROWS][COLS], int player, int row1, int col1, int row2, int col2);
-        int testMove(int grid[ROWS][COLS], int player, int row1, int col1, int row2, int col2);
-
-        int legalMoves(int player, int grid[ROWS][COLS]);
-        int checkJump(int grid[ROWS][COLS], int player, int rr, int cc);
-
-        void computerMove(int grid[ROWS][COLS], int player);
-
-        int testComputer(int grid[ROWS][COLS], int player);
-
-        vector<MovePiece> computerCheck(int grid[ROWS][COLS], int player);
-
-        int evaluation1(int grid[ROWS][COLS], int player);
-		int evaluation2(int grid[ROWS][COLS], int player);
-		int evaluation3(int grid[ROWS][COLS], int player);
-        MovePiece* minimax(int grid[8][8], int player);
-
-        int maxMove(int grid[8][8],
-            MovePiece* bestMove,
-            int player,           
-            int alpha,
-            int beta,
-            int bottom,
-            int depth);
-
-        int minMove(int grid[8][8],
-            MovePiece* bestMove,
-            int player,            
-            int alpha,
-            int beta,
-            int bottom,
-            int depth);
-
-        void GenerateComputerMove();
-        
-		bool isMoveValid2(int grid[ROWS][COLS], int r1, int c1, int r2, int c2);
-        bool isRegularMove(int grid[ROWS][COLS], int r1, int c1, int r2, int c2);
-        // bool isJumpMove()
-        int numberWhitePiecesOnBoard(int grid[ROWS][COLS]);
-        int numberBlackPiecesOnBoard(int grid[ROWS][COLS]);
-
-		wxMenuBar *m_MenuBar=nullptr;	
-		wxStatusBar* statusbar=nullptr;
-		
-		void OnMenuExit(wxCommandEvent &evt);
-		void OnMenuResetBoard(wxCommandEvent &evt);
-		void OnMenuAbout(wxCommandEvent &evt);
-		
-		//Event table
-      	DECLARE_EVENT_TABLE()	
-		enum {
+	
+	wxMenuBar *m_MenuBar=nullptr;
+	void OnMenuExit(wxCommandEvent &evt);
+	void OnMenuResetBoard(wxCommandEvent &evt);
+	void OnMenuAbout(wxCommandEvent &evt);
+	enum {
 	    // declare event ids
 		MENU_Exit =wxID_HIGHEST + 1,
 		MENU_RESET,
 		MENU_ABOUT
 	 };
+	
+	//Event table
+	DECLARE_EVENT_TABLE()
 };
 
 #endif // MAINWINDOW_H
+
+

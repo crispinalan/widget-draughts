@@ -4,8 +4,7 @@ add_executable(
     draughts.h
     mainwindow.cpp
     mainwindow.h
-    movepiece.cpp
-    movepiece.h
+    board.cpp   
     )
 
 target_link_libraries(
