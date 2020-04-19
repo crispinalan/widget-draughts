@@ -14,7 +14,7 @@ With Widget Draughts you play against the computer. The human player is white an
 
 ## Install Using Deb Package
 
-You can use the deb package [wxdraughts_1.0.3_amd64.deb](https://github.com/crispinalan/widget-draughts/tree/master/deb/) for installing the latest version of widget draughts. Right click on the package and use "Save Link As".
+You can use the deb package [wxdraughts_1.0.3_amd64.deb](https://github.com/crispinalan/widget-draughts/tree/master/deb/) for installing the latest version of widget draughts on Debian and it deriviatives (Linux Mint, Ubuntu etc). Right click on the deb package and select "Save Link As" to download.
 
 ### Linux Mint Debian Edition (Debbie)
 
