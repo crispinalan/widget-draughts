@@ -46,6 +46,8 @@ cmake ..
 make
 sudo make install (Mint)
 ```
+Widget Draughts (wxdraughts) is installed to /usr/local/bin
+
 ## Build From Source Prerequisites
 
 To build and install Widget Draughts on Debian, Ubuntu and Ubuntu derivatives you need to install the following packages (if not already installed) 
