@@ -10,16 +10,28 @@ Draughts (also known as checkers) is a  strategy board game for two players whic
 
 With Widget Draughts you play against the computer. The human player is white and the computer is black.
 
-### Prerequisites
 
-To build and install Widget Draughts on Debian, Ubuntu and Ubuntu derivatives you need to install the following packages (if not already installed) 
 
-```
-sudo apt install build-essential
-sudo apt install cmake
-sudo apt install libwxgtk3.0-dev
-sudo apt install git 
-```
+### Deb Package
+
+You can use the deb package (wxdraughts_1.0.3_amd64.deb) for installing the latest version of widget draughts.
+
+#Linux Mint Debian Edition (Debbie)
+
+Download the wxdraughts_1.0.3_amd64.deb package into the Downloads directory.
+
+Open the wxdraughts_1.0.3_amd64.deb with gdebi and install entrering your password when prompted
+
+#Debian
+
+Download wxdraughts_1.0.3_amd64.deb package into the Downloads directory.
+
+Then install from the command line as follows (don't forget the "-" with su)
+
+user@debian:su -
+Password: 
+root@debian:~# cd /home/user/Downloads/
+root@debian:/home/user/Downloads# dpkg -i wxdraughts_1.0.3_amd64.deb
 
 ### Build From Source
 
@@ -30,35 +42,22 @@ mkdir build
 cd build  
 cmake ..
 make
-su (Debian)
-make install
-or
-sudo make install (Ubuntu)
+sudo make install (Mint)
 ```
-Widget Draughts is installed to /usr/local/wxdraughts
+### Build From Source Prerequisites
 
-Use a menu editor such as [Alacarte](https://en.wikipedia.org/wiki/Alacarte) on GNOME to add Widget Draughts to the system menu.
+To build and install Widget Draughts on Debian, Ubuntu and Ubuntu derivatives you need to install the following packages (if not already installed) 
 
-### Binaries
-
-![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/widget-draughts)
-
-
-
-To install use ..
 ```
-sudo snap install --edge widget-draughts
+sudo apt install build-essential
+sudo apt install cmake
+sudo apt install libwxgtk3.0-dev
+sudo apt install git 
 ```
-To remove use ..
-```
-sudo snap remove widget-draughts
-```
-
-The snap package has been developed to learn about snapcraft packaging. With a snap package the application is distributed (sandboxed) inside a minimal virtual machine. However, with this small application building from source is straightforward and provides the latest source.
 
 ## Versioning
 
-[SemVer](http://semver.org/) is used for versioning. 
+[SemVer](http://semver.org/) is used for versioning. The version number has the form 0.0.0 representing major, minor and bug fix changes. Currently at 1.0.3.
 
 ## Authors
 
@@ -67,7 +66,7 @@ The snap package has been developed to learn about snapcraft packaging. With a s
 
 ## License
 
-This project is licensed under the GPL License.
+This project is licensed under the Apache 2.0 License.
 
 ## Roadmap
 
@@ -78,10 +77,8 @@ strengthen draughts-play minimax engine
 check pieces threatened with capture 
 check pieces endangered when making a move
 introduce triple kings 
-provide an option to set skill level
 improve end game 
+provide additional options
 ``` 
 
-## History
 
-Widget Draughts was orginally developed in 2011 as a C++ wxWidgets application using Code::Blocks. This code was directly translated into the [Qt Draughts](https://bitbucket.org/crispinalan/qt-5-draughts/src/master/) application in 2013. With the current release wxWidgets has again been used for developing the graphical user interface. The version number has been reset to 1.0.0 representing major, minor and bug fix changes. The [wxWidgets](https://www.wxwidgets.org/) library licence is L-GPL (Library General Public Licence) with an exception stating that derived works in binary form may be distributed on the user’s own terms. The [CodeLite](https://codelite.org/) IDE has been used for code development. CodeLite is distributed under the terms of the GPLv2 license, with an exception for plugins. 
