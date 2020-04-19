@@ -12,26 +12,28 @@ With Widget Draughts you play against the computer. The human player is white an
 
 
 
-### Deb Package
+## Deb Package
 
 You can use the deb package (wxdraughts_1.0.3_amd64.deb) for installing the latest version of widget draughts.
 
-#Linux Mint Debian Edition (Debbie)
+### Linux Mint Debian Edition (Debbie)
 
 Download the wxdraughts_1.0.3_amd64.deb package into the Downloads directory.
 
-Open the wxdraughts_1.0.3_amd64.deb with gdebi and install entrering your password when prompted
+Open the wxdraughts_1.0.3_amd64.deb with gdebi and install entering your password when prompted
 
-#Debian
+### Debian
 
 Download wxdraughts_1.0.3_amd64.deb package into the Downloads directory.
 
 Then install from the command line as follows (don't forget the "-" with su)
 
+```
 user@debian:su -
 Password: 
 root@debian:~# cd /home/user/Downloads/
 root@debian:/home/user/Downloads# dpkg -i wxdraughts_1.0.3_amd64.deb
+```
 
 ### Build From Source
 
@@ -44,7 +46,7 @@ cmake ..
 make
 sudo make install (Mint)
 ```
-### Build From Source Prerequisites
+## Build From Source Prerequisites
 
 To build and install Widget Draughts on Debian, Ubuntu and Ubuntu derivatives you need to install the following packages (if not already installed) 
 
