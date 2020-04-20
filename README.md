@@ -14,19 +14,29 @@ With Widget Draughts you play against the computer. The human player is white an
 
 ## Install Using Deb Package
 
-You can use the deb package [wxdraughts_1.0.3_amd64.deb](https://github.com/crispinalan/widget-draughts/tree/master/deb/) for installing the latest version of widget draughts on Debian and Debian based distributions (e.g. Linux Mint, Ubuntu and it derivatives). Right click on the deb package and select "Save Link As" to download.
+You can install widgedraughts using deb packages located at [deb-packages](https://github.com/crispinalan/widget-draughts/tree/master/deb-packages/) 
+
+Use the _wwxdraughts_1.0.3_amd64.deb_  package for 64-bit Debian and Debian based distributions (e.g. Linux Mint, Ubuntu and it derivatives). 
+
+Use the _wxdraughts_1.0.3_armhf.deb_  package for the Raspberry Pi.
+
+Right click on the deb package and select "Save Link As" to download.
+
+Further details below:
 
 ### Linux Mint Debian Edition (Debbie)
 
-Download the wxdraughts_1.0.3_amd64.deb package into the Downloads directory.
+Download the wxdraughts_1.0.3_amd64.deb package into the Downloads directory. Open a terminal and install widgetdraughts using:
 
-Open the wxdraughts_1.0.3_amd64.deb with gdebi and install entering your password when prompted.
+```
+cd Downloads
+sudo dpkg -i wxdraughts_1.0.3_amd64.deb 
+```
+Entering your sudo (user) password when prompted.
 
 ### Debian
 
-Download wxdraughts_1.0.3_amd64.deb package into the Downloads directory.
-
-Then install using the command line as follows (don't forget the "-" with su)
+Download wxdraughts_1.0.3_amd64.deb package into the Downloads directory.Open a terminal and install widgetdraughts using the commands below (don't forget the "-" with su):
 
 ```
 user@debian:su -
@@ -35,22 +45,43 @@ root@debian:~# cd /home/user/Downloads/
 root@debian:/home/user/Downloads# dpkg -i wxdraughts_1.0.3_amd64.deb
 ```
 
+### Raspberry Pi
+
+Download the wxdraughts_1.0.3_armhf.deb package (not the amd64 package) into the Downloads directory. Open a terminal and install widgetdraughts using:
+
+```
+cd Downloads
+sudo dpkg -i wxdraughts_1.0.3_armhf.deb
+```
+If widgetdraughts fails to install due to missing dependencies then run
+
+```
+sudo apt-get install -f
+sudo dpkg -i wxdraughts_1.0.3_armhf.deb
+```
+
+The _sudo apt-get install -f_  attempts to fix the problem by installing  the missing dependencies. Then dpkg will install widgetdraughts once the all dependencies are present. 
+
+You have to log out and log back into Raspbian to see the installed widgetdraughts package (menu -> other).
+
+Note: The Raspberry Pi deb package is 32-bit not 64-bit and so should not be used with 64-bit operating systems.
+
 ### Build From Source
 
-To build Widget Draughts from source 
+For other distributions you can build Widget Draughts from source 
 
 ```
 mkdir build  
 cd build  
 cmake ..
 make
-sudo make install (Mint)
+sudo make install 
 ```
 Widget Draughts (wxdraughts) is installed to /usr/local/bin
 
 ## Build From Source Prerequisites
 
-To build and install Widget Draughts on Debian, Ubuntu and Ubuntu derivatives you need to install the following packages (if not already installed) 
+To build from source you need to install the following packages (dependencies)
 
 ```
 sudo apt install build-essential
