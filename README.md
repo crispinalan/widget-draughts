@@ -11,10 +11,9 @@ Draughts (also known as checkers) is a  strategy board game for two players whic
 With Widget Draughts you play against the computer. The human player is white and the computer is black.
 
 
-
 ## Install Using Deb Package
 
-You can install widgedraughts using deb packages located at [deb-packages](https://github.com/crispinalan/widget-draughts/tree/master/deb-packages/) 
+You can install Widget Draughts by using the appropriate deb package located at [deb-packages](https://github.com/crispinalan/widget-draughts/tree/master/deb-packages/) 
 
 Use the _wwxdraughts_1.0.3_amd64.deb_  package for 64-bit Debian and Debian based distributions (e.g. Linux Mint, Ubuntu and it derivatives). 
 
@@ -24,32 +23,28 @@ Right click on the deb package and select "Save Link As" to download.
 
 Further details below:
 
-### Linux Mint Debian Edition (Debbie)
+### Verify Deb Package
 
-Download the wxdraughts_1.0.3_amd64.deb package into the Downloads directory. Open a terminal and install widgetdraughts using:
+You can verify the deb package by checking the md5sum of the deb package with the appropriate file provided. So for the 64-bit operating system deb package (amd64) it can be checked by running:
 
+```
+cat wxdraughts_1.0.3_amd64.md5
+md5sum wxdraughts_1.0.3_amd64.deb
+```
+Both sums (numbers) should be the same.
+
+### Linux Mint Debian Edition 4 (Debbie)
+
+Download the _wxdraughts_1.0.3_amd64.deb_ package into the Downloads directory. Open a terminal and install widgetdraughts using:
 ```
 cd Downloads
 sudo dpkg -i wxdraughts_1.0.3_amd64.deb 
 ```
-Entering your sudo (user) password when prompted.
-
-To remove widget draughts run:
-
-```
-sudo dpkg -r  widgetdraughts 
-```
-You can verify the deb package by checking the md5sum of the deb package by running
-
-```
-md5sum wxdraughts_1.0.3_amd64.deb
-cat wxdraughts_1.0.3_amd64.md5
-```
-Both sums should be the same.
+Enter your sudo (user) password when prompted.
  
 ### Debian
 
-Download wxdraughts_1.0.3_amd64.deb package into the Downloads directory.Open a terminal and install widgetdraughts using the commands below (don't forget the "-" with su):
+Download the _wxdraughts_1.0.3_amd64.deb_ package into the Downloads directory. Open a terminal and install Widget Draughts using the commands below (don't forget the "-" with su):
 
 ```
 user@debian:su -
@@ -60,32 +55,26 @@ root@debian:/home/user/Downloads# dpkg -i wxdraughts_1.0.3_amd64.deb
 
 ### Raspberry Pi
 
-Download the wxdraughts_1.0.3_armhf.deb package (not the amd64 package) into the Downloads directory. Open a terminal and install widgetdraughts using:
+Download the _wxdraughts_1.0.3_armhf.deb_ package (not the amd64 package) into the Downloads directory. Open a terminal and install Widget Draughts using:
 
 ```
-cd Downloads
-sudo dpkg -i wxdraughts_1.0.3_armhf.deb
-```
-If widgetdraughts fails to install due to missing dependencies then run
-
-```
-sudo apt-get install -f
 sudo dpkg -i wxdraughts_1.0.3_armhf.deb
 ```
 
-You have to log out and log back into Raspbian to see the installed widgetdraughts package (menu -> other).
+Widget Draughts should be in: menu -> other
 
-Note: The Raspberry Pi deb package is 32-bit not 64-bit and so should not be used with 64-bit operating systems.
+Note: The Raspberry Pi deb package is 32-bit, not 64-bit, and so should not be used with 64-bit operating systems.
 
-## Missing Dependencies
+### Missing Dependencies
 
-If widgetdraughts fails to install due to missing dependencies then run
+If Widget Draughts fails to install due to missing dependencies then run
 
 ```
 sudo apt-get install -f
 ```
+Then use dpkg again to reinstall the Widget Draughts deb package. 
 
-and then reinstall the widget draughts deb package. The _sudo apt-get install -f_  attempts to fix the problem by  fixing (-f) i.e. installing  the missing dependencies. dpkg will install widgetdraughts once the all dependencies are present. 
+The _sudo apt-get install -f_  attempts to fix (-f) the problem by installing the missing dependencies. dpkg will install widgetdraughts once the all dependencies are present. 
 
 So for for the Raspberry Pi you would run
 
@@ -93,8 +82,17 @@ So for for the Raspberry Pi you would run
 sudo apt-get install -f
 sudo dpkg -i wxdraughts_1.0.3_armhf.deb
 ```
+You may have to logout and login for changes to take effect. Widget Draughts should be in: menu -> other.
 
-### Build From Source
+### Remove Widget Draughts
+
+To remove widget draughts run:
+
+```
+sudo dpkg -r  widgetdraughts 
+```
+
+## Build From Source
 
 For other distributions you can build Widget Draughts from source 
 
@@ -107,7 +105,7 @@ sudo make install
 ```
 Widget Draughts (wxdraughts) is installed to /usr/local/bin
 
-## Build From Source Prerequisites
+### Build From Source Prerequisites
 
 To build from source you need to install the following packages (dependencies)
 
