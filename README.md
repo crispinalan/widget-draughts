@@ -34,6 +34,19 @@ sudo dpkg -i wxdraughts_1.0.3_amd64.deb
 ```
 Entering your sudo (user) password when prompted.
 
+To remove widget draughts run:
+
+```
+sudo dpkg -r  widgetdraughts 
+```
+You can verify the deb package by checking the md5sum of the deb package by running
+
+```
+md5sum wxdraughts_1.0.3_amd64.deb
+cat wxdraughts_1.0.3_amd64.md5
+```
+Both sums should be the same.
+ 
 ### Debian
 
 Download wxdraughts_1.0.3_amd64.deb package into the Downloads directory.Open a terminal and install widgetdraughts using the commands below (don't forget the "-" with su):
@@ -60,11 +73,26 @@ sudo apt-get install -f
 sudo dpkg -i wxdraughts_1.0.3_armhf.deb
 ```
 
-The _sudo apt-get install -f_  attempts to fix the problem by installing  the missing dependencies. Then dpkg will install widgetdraughts once the all dependencies are present. 
-
 You have to log out and log back into Raspbian to see the installed widgetdraughts package (menu -> other).
 
 Note: The Raspberry Pi deb package is 32-bit not 64-bit and so should not be used with 64-bit operating systems.
+
+## Missing Dependencies
+
+If widgetdraughts fails to install due to missing dependencies then run
+
+```
+sudo apt-get install -f
+```
+
+and then reinstall the widget draughts deb package. The _sudo apt-get install -f_  attempts to fix the problem by  fixing (-f) i.e. installing  the missing dependencies. dpkg will install widgetdraughts once the all dependencies are present. 
+
+So for for the Raspberry Pi you would run
+
+```
+sudo apt-get install -f
+sudo dpkg -i wxdraughts_1.0.3_armhf.deb
+```
 
 ### Build From Source
 
