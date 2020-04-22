@@ -41,6 +41,8 @@ cd Downloads
 sudo dpkg -i wxdraughts_1.0.3_amd64.deb 
 ```
 Enter your sudo (user) password when prompted.
+
+*Don't like the terminal command line:*  You can right click on the deb package file and select "Open with GDebi Package Installer". Then click the "Install Package" button.
  
 ### Debian
 
