@@ -112,10 +112,10 @@ Widget Draughts (wxdraughts) is installed to /usr/local/bin
 To build from source you need to install the following packages (dependencies)
 
 ```
-sudo apt install build-essential
-sudo apt install cmake
-sudo apt install libwxgtk3.0-dev
-sudo apt install git 
+build-essential
+cmake
+libwxgtk3.0-dev
+git 
 ```
 
 ## Versioning
