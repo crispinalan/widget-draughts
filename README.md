@@ -25,13 +25,12 @@ Further details below:
 
 ### Verify Deb Package
 
-You can verify the deb package by checking the md5sum of the deb package with the appropriate file provided. So for the 64-bit operating system deb package (amd64) it can be checked by running:
+You can use the debsums command (sudo apt-get install debsums) to check the deb package md5 signatures. For example:
 
 ```
-cat wxdraughts_1.0.3_amd64.md5
-md5sum wxdraughts_1.0.3_amd64.deb
+debsums wxdraughts_1.0.3_amd64.deb
 ```
-Both sums (numbers) should be the same.
+All outputs should be "OK"
 
 ### Linux Mint Debian Edition 4 (Debbie)
 
@@ -42,7 +41,7 @@ sudo dpkg -i wxdraughts_1.0.3_amd64.deb
 ```
 Enter your sudo (user) password when prompted.
 
-*Don't like the terminal command line:*  You can right click on the deb package file and select "Open with GDebi Package Installer". Then click the "Install Package" button.
+*Alternatively:*  You can right click on the deb package file and select "Open with GDebi Package Installer". Then click the "Install Package" button.
  
 ### Debian
 
