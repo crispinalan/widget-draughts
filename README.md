@@ -25,14 +25,17 @@ Further details below:
 
 ### Verify Deb Package
 
-You can use the debsums command (sudo apt-get install debsums) to check the deb package md5 signatures. For example:
+You can verify the deb package by checking the md5sum of the deb package with the appropriate md5 file provided. So for the 64-bit operating system deb package (amd64) it can be checked by running:
 
 ```
-debsums wxdraughts_1.0.3_amd64.deb
+cat wxdraughts_1.0.3_amd64.md5
+md5sum wxdraughts_1.0.3_amd64.deb
 ```
-All outputs should be "OK"
+Both sums (numbers) should be the same.
 
-### Linux Mint Debian Edition 4 (Debbie)
+See the "Advanced Package Verification" section for further checking.
+
+### Installing On Linux Mint Debian Edition 4
 
 Download the _wxdraughts_1.0.3_amd64.deb_ package into the Downloads directory. Open a terminal and install widgetdraughts using:
 ```
@@ -41,9 +44,11 @@ sudo dpkg -i wxdraughts_1.0.3_amd64.deb
 ```
 Enter your sudo (user) password when prompted.
 
+Widget Draughts should be in: menu -> other
+
 *Alternatively:*  You can right click on the deb package file and select "Open with GDebi Package Installer". Then click the "Install Package" button.
  
-### Debian
+### Installing On Debian
 
 Download the _wxdraughts_1.0.3_amd64.deb_ package into the Downloads directory. Open a terminal and install Widget Draughts using the commands below (don't forget the "-" with su):
 
@@ -54,7 +59,7 @@ root@debian:~# cd /home/user/Downloads/
 root@debian:/home/user/Downloads# dpkg -i wxdraughts_1.0.3_amd64.deb
 ```
 
-### Raspberry Pi
+### Installing On Raspberry Pi
 
 Download the _wxdraughts_1.0.3_armhf.deb_ package (not the amd64 package) into the Downloads directory. Open a terminal and install Widget Draughts using:
 
@@ -75,7 +80,7 @@ sudo apt-get install -f
 ```
 Then use dpkg again to reinstall the Widget Draughts deb package. 
 
-The _sudo apt-get install -f_  attempts to fix (-f) the problem by installing the missing dependencies. dpkg will install widgetdraughts once the all dependencies are present. 
+The _sudo apt-get install -f_  attempts to fix (-f) the problem by installing the missing dependencies. The dpkg will install Widget Draughts once the all dependencies are present. 
 
 So for for the Raspberry Pi you would run
 
@@ -85,6 +90,17 @@ sudo dpkg -i wxdraughts_1.0.3_armhf.deb
 ```
 You may have to logout and login for changes to take effect. Widget Draughts should be in: menu -> other.
 
+
+### Manual
+
+You can use the terminal commands
+
+```
+whatis widgetdraughts
+man widgetdraughts
+```
+for more information about Widget Draughts
+
 ### Remove Widget Draughts
 
 To remove widget draughts run:
@@ -92,6 +108,23 @@ To remove widget draughts run:
 ```
 sudo dpkg -r  widgetdraughts 
 ```
+### Advanced Package Verification
+
+Once Widget Draughts is installed you can use the debsums command (sudo apt install debsums) to check the internal deb package md5  signatures. For example:
+
+```
+debsums wxdraughts_1.0.3_amd64.deb
+```
+All outputs should report "OK". 
+
+```
+OK – indicates that a file’s md5 sum is good 
+FAILED – shows that a file’s md5 sum does not match (problem detected)
+REPLACED – means that the specific file has been replaced by a file from another package
+
+```
+
+The command debsums verifies the integrity of installed package files against md5 checksums installed by the Widget Draughts package.
 
 ## Build From Source
 
