@@ -35,6 +35,17 @@ Both sums (numbers) should be the same.
 
 See the "Advanced Package Verification" section for further checking.
 
+### Installing On Debian
+
+On Debian you need to use the "su" command. Download the _wxdraughts_1.0.3_amd64.deb_ package into the Downloads directory. Open a terminal and install Widget Draughts using the commands below:
+
+```
+cd Downloads
+su 
+Password: 
+dpkg -i wxdraughts_1.0.3_amd64.deb
+```
+
 ### Installing On Linux Mint Debian Edition 4
 
 Download the _wxdraughts_1.0.3_amd64.deb_ package into the Downloads directory. Open a terminal and install widgetdraughts using:
@@ -48,16 +59,6 @@ Widget Draughts should be in: menu -> other
 
 *Alternatively:*  You can right click on the deb package file and select "Open with GDebi Package Installer". Then click the "Install Package" button.
  
-### Installing On Debian
-
-Download the _wxdraughts_1.0.3_amd64.deb_ package into the Downloads directory. Open a terminal and install Widget Draughts using the commands below (don't forget the "-" with su):
-
-```
-user@debian:su -
-Password: 
-root@debian:~# cd /home/user/Downloads/
-root@debian:/home/user/Downloads# dpkg -i wxdraughts_1.0.3_amd64.deb
-```
 
 ### Installing On Raspberry Pi
 
