@@ -2,7 +2,7 @@
  Author Alan Crispin aka. crispina                                    
     crispinalan@gmail.com         
  
-   Copyright [2020] [Alan Crispin]
+   Copyright  2020  Alan Crispin
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -31,9 +31,23 @@ Draughts::~Draughts()
 
 bool Draughts::OnInit()
 {
+	// Create the main application window
 	w = new MainWindow();
-	w->SetAutoLayout(true);
-	w->Show(true);
+	// repaint on resize
+	w->SetWindowStyle(w->GetWindowStyle() | wxFULL_REPAINT_ON_RESIZE);
+	
+	// Set the background to white
+	//w->SetBackgroundColour(wxColour( 114, 104, 104));
 
-	return true;
+	// Show it
+	w->Show( true );
+
+	 // Start the event loop
+	 return true;
+		
+	//w = new MainWindow();
+	//w->SetAutoLayout(true);
+	//w->Show(true);
+
+	//return true;
 }

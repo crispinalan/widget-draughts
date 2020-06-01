@@ -181,10 +181,12 @@ Future updates:
 minimax (completed version 1.0.3)
 alpha-beta minimax engine (completed version 1.1.0)
 search depth menu options (completed version 1.1.0)
-undo move feature
-save game moves
-resizable game board
-improve end game
+new board representation (not 2d array) 
+hashing function 
+transposition table
+quiescence search
+time limited search
+end games
 ``` 
 
 

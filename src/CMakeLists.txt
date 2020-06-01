@@ -3,8 +3,7 @@ add_executable(
     draughts.cpp
     draughts.h
     mainwindow.cpp
-    mainwindow.h
-    board.cpp   
+    mainwindow.h     
     )
 
 target_link_libraries(

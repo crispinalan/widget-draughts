@@ -2,7 +2,7 @@
   Author Alan Crispin aka. crispina                                    
     crispinalan@gmail.com         
  
-   Copyright [2020] [Alan Crispin]
+   Copyright 2020  Alan Crispin
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
