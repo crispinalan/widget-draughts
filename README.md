@@ -176,17 +176,12 @@ This project is licensed under the Apache 2.0 License.
 
 ## Roadmap
 
-Future updates:
+
 ```
 minimax (completed version 1.0.3)
 alpha-beta minimax engine (completed version 1.1.0)
 search depth menu options (completed version 1.1.0)
-new board representation (not 2d array) 
-hashing function 
-transposition table
-quiescence search
-time limited search
-end games
+updates
 ``` 
 
 
